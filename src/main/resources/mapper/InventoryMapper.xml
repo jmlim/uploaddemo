@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.jmlim.upload.demo.mapper.InventoryMapper">
+   <!-- <insert id="insertInventory">
+        /* [업로드 작업] com.jmlim.upload.demo.mapper.InventoryMapper#insertInventory */
+        INSERT INTO inventory (
+            gsn, usn, item_id, item_type, game_item_id, in_type, cdl_id, create_date
+        ) VALUES (
+            #{gsn}, #{usn}, #{itemId}, #{itemType}, #{gameItemId},'99', #{cdlId}, NOW()
+        )
+    </insert>-->
+
+    <insert id="insertInventory">
+        /* [업로드 작업] com.jmlim.upload.demo.mapper.InventoryMapper#insertInventory */
+        INSERT INTO inventory (
+        gsn, usn, item_id, item_type, game_item_id, in_type, cdl_id, create_date
+        ) VALUES
+        <foreach collection="paramList" item="param" separator=",">
+            (
+            #{param.gsn}, #{param.usn}, #{param.itemId}, #{param.itemType}, #{param.gameItemId},'99', #{param.cdlId}, NOW()
+            )
+        </foreach>
+    </insert>
+</mapper>
